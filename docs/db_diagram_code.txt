@@ -1,0 +1,29 @@
+# Can be edited on dbdiagram.io
+
+Table users {
+  id number [pk]
+  username string
+  password string
+  age number
+  user_type_id number [ref: > user_types.id]
+}
+
+Table user_types {
+  id number [pk]
+  type string
+}
+
+Table movies {
+  id number [pk]
+  name string
+  age_restriction number
+}
+
+Table tickets {
+  id number [pk]
+  user_id number [ref: > users.id]
+  movie_id number [ref: > movies.id]
+  date date
+  time_slot string
+  watched bool
+}
