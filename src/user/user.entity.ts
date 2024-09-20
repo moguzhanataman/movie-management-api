@@ -1,4 +1,11 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { UserType } from './user-type.entity';
 
 @Entity()
 export class User {
@@ -6,11 +13,15 @@ export class User {
   id: number;
 
   @Column()
-  firstName: string;
+  username: string;
 
   @Column()
-  lastName: string;
+  password: string;
 
-  @Column({ default: true })
-  isActive: boolean;
+  @Column()
+  age: number;
+
+  @ManyToOne(() => UserType, (userType) => userType.users)
+  @JoinColumn({ name: 'user_type_id' })
+  userType: UserType;
 }
