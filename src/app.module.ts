@@ -1,11 +1,13 @@
 import { Module } from '@nestjs/common';
+import { APP_FILTER } from '@nestjs/core';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
-import { UserModule } from './user/user.module';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { APP_FILTER } from '@nestjs/core';
 import { HttpExceptionFilter } from './errors/http-exception.filter';
+import { MovieController } from './movie/movie.controller';
+import { MovieModule } from './movie/movie.module';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
@@ -17,6 +19,7 @@ import { HttpExceptionFilter } from './errors/http-exception.filter';
     }),
     AuthModule,
     UserModule,
+    MovieModule,
   ],
   controllers: [AppController],
   providers: [
