@@ -1,8 +1,4 @@
-import {
-  BadRequestException,
-  Injectable,
-  UnauthorizedException,
-} from '@nestjs/common';
+import { BadRequestException, Injectable, Logger, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
 import { BusinessErrors } from 'src/_errors/errors';
@@ -30,22 +26,25 @@ export class AuthService {
     u.password = password;
     u.age = age;
     this.usersRepository.save(u);
-
-    console.log({ user, password, age });
   }
 
   async login(username: string, password: string) {
-    const user = await this.usersRepository.findOneBy({ username });
-    if (user?.password !== password) {
+    try {
+      const user = await this.usersRepository.findOneBy({ username });
+      if (user?.password !== password) {
+        throw new UnauthorizedException();
+      }
+      const payload = {
+        sub: user.id,
+        username: user.username,
+        userType: user.userType,
+      };
+      return {
+        access_token: await this.jwtService.signAsync(payload),
+      };
+    } catch (e) {
+      Logger.error(e);
       throw new UnauthorizedException();
     }
-    const payload = {
-      sub: user.id,
-      username: user.username,
-      userType: user.userType,
-    };
-    return {
-      access_token: await this.jwtService.signAsync(payload),
-    };
   }
 }

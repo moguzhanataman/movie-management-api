@@ -1,7 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, InternalServerErrorException, Logger } from '@nestjs/common';
 import { MovieSession } from './movie-session.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { GeneralErrors } from 'src/_errors/errors';
 
 @Injectable()
 export class MovieSessionService {
@@ -11,14 +12,19 @@ export class MovieSessionService {
   ) {}
 
   async create(sessionDetails: Partial<MovieSession>) {
-    const ms = new MovieSession();
+    try {
+      const ms = new MovieSession();
 
-    ms.date = sessionDetails.date;
-    ms.movieId = sessionDetails.movieId;
-    ms.room = sessionDetails.room;
-    ms.timeSlot = sessionDetails.timeSlot;
+      ms.date = sessionDetails.date;
+      ms.movieId = sessionDetails.movieId;
+      ms.room = sessionDetails.room;
+      ms.timeSlot = sessionDetails.timeSlot;
 
-    return this.movieSessionRepository.save(ms);
+      return this.movieSessionRepository.save(ms);
+    } catch (e) {
+      Logger.error(e);
+      throw new InternalServerErrorException(GeneralErrors.DBError);
+    }
   }
 
   async delete(id: number) {

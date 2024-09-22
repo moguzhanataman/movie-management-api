@@ -1,18 +1,12 @@
-import {
-  Column,
-  Entity,
-  JoinColumn,
-  ManyToOne,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
-import { UserType } from './user-type.entity';
+import { UserTypes } from 'src/_constants/user-types';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class User {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({ unique: true })
   username: string;
 
   @Column()
@@ -21,7 +15,6 @@ export class User {
   @Column()
   age: number;
 
-  @ManyToOne(() => UserType, (userType) => userType.users)
-  @JoinColumn({ name: 'user_type_id' })
-  userType: UserType;
+  @Column({ default: UserTypes.customer })
+  userType: string;
 }
