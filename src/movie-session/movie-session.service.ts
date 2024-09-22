@@ -10,7 +10,7 @@ export class MovieSessionService {
     private readonly movieSessionRepository: Repository<MovieSession>,
   ) {}
 
-  async createSession(sessionDetails: Partial<MovieSession>) {
+  async create(sessionDetails: Partial<MovieSession>) {
     const ms = new MovieSession();
 
     ms.date = sessionDetails.date;
@@ -18,6 +18,10 @@ export class MovieSessionService {
     ms.room = sessionDetails.room;
     ms.timeSlot = sessionDetails.timeSlot;
 
-    this.movieSessionRepository.save(ms);
+    return this.movieSessionRepository.save(ms);
+  }
+
+  async delete(id: number) {
+    this.movieSessionRepository.update({ id }, { deleted: true });
   }
 }

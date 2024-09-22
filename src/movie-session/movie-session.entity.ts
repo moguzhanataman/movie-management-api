@@ -21,4 +21,7 @@ export class MovieSession {
 
   @Column()
   timeSlot: string;
+
+  @Column({ default: false })
+  deleted: boolean;
 }
