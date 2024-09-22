@@ -5,7 +5,7 @@ import {
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Errors } from 'src/errors/errors';
+import { BusinessErrors } from 'src/errors/errors';
 import { User } from 'src/user/user.entity';
 import { Repository } from 'typeorm';
 
@@ -22,7 +22,7 @@ export class AuthService {
 
     // User exists
     if (user != null) {
-      throw new BadRequestException(Errors.Auth.UserExists);
+      throw new BadRequestException(BusinessErrors.Auth.UserExists);
     }
 
     const u = new User();

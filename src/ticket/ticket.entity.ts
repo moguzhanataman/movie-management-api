@@ -1,17 +1,33 @@
 import { Movie } from 'src/movie/movie.entity';
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { User } from 'src/user/user.entity';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity()
-export class User {
+export class Ticket {
   @PrimaryGeneratedColumn()
   id: number;
 
+  @Column()
+  userId: number;
+
   @ManyToOne(() => User, (user) => user.id)
-  //   @JoinColumn({ name: 'user_id' })
+  @JoinColumn()
   user: User;
 
+  @Column()
+  movieId: number;
+
   @ManyToOne(() => Movie, (movie) => movie.id)
+  @JoinColumn()
   movie: Movie;
+
+  room: number;
 
   @Column()
   date: Date;
@@ -22,3 +38,13 @@ export class User {
   @Column({ default: false })
   watched: boolean;
 }
+
+export const TimeSlots = [
+  '10:00-12:00',
+  '12:00-14:00',
+  '14:00-16:00',
+  '16:00-18:00',
+  '18:00-20:00',
+  '20:00-22:00',
+  '22:00-00:00',
+];
