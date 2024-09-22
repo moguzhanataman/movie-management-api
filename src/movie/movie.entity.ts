@@ -10,4 +10,7 @@ export class Movie {
 
   @Column()
   ageRestriction: number;
+
+  @Column({ default: false })
+  deleted: boolean;
 }

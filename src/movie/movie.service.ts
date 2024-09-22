@@ -11,6 +11,17 @@ export class MovieService {
   ) {}
 
   getAll() {
-    return this.moviesRepository.find();
+    return this.moviesRepository.findBy({ deleted: false });
+  }
+
+  async addMovie(name: string, ageRestriction: number) {
+    const m = new Movie();
+    m.name = name;
+    m.ageRestriction = ageRestriction;
+    return this.moviesRepository.save(m);
+  }
+
+  async deleteMovie(id: number) {
+    return this.moviesRepository.update({ id }, { deleted: true });
   }
 }
