@@ -1,4 +1,4 @@
-import { UserTypes } from 'src/_constants/user-types';
+import { UserTypes } from '../_constants/user-types';
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()

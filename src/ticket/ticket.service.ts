@@ -8,10 +8,10 @@ import {
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Ticket } from './ticket.entity';
-import { Movie } from 'src/movie/movie.entity';
-import { User } from 'src/user/user.entity';
-import { BusinessErrors, GeneralErrors } from 'src/_errors/errors';
-import { MovieSession } from 'src/movie-session/movie-session.entity';
+import { Movie } from '../movie/movie.entity';
+import { User } from '../user/user.entity';
+import { BusinessErrors, GeneralErrors } from '../_errors/errors';
+import { MovieSession } from '../movie-session/movie-session.entity';
 
 @Injectable()
 export class TicketService {

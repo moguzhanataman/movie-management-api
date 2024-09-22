@@ -1,5 +1,4 @@
-import { Movie } from 'src/movie/movie.entity';
-import { User } from 'src/user/user.entity';
+import { Movie } from '../movie/movie.entity';
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()

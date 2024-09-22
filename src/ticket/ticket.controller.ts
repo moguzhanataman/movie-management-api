@@ -1,7 +1,7 @@
 import { Body, Controller, Logger, Post, UseGuards } from '@nestjs/common';
 import { BuyTicketDto } from './dto/buy-ticket.dto';
 import { TicketService } from './ticket.service';
-import { CustomerGuard } from 'src/auth/customer.guard';
+import { CustomerGuard } from '../auth/customer.guard';
 
 @Controller('ticket')
 export class TicketController {

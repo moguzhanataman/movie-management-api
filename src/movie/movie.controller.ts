@@ -3,8 +3,8 @@ import { MovieService } from './movie.service';
 import { AddMovieDto } from './dto/add-movie.dto';
 import { DeleteMovieDto } from './dto/delete-movie.dto';
 import { UpdateMovieDto } from './dto/update-movie.dto';
-import { ManagerGuard } from 'src/auth/manager.guard';
-import { CustomerGuard } from 'src/auth/customer.guard';
+import { ManagerGuard } from '../auth/manager.guard';
+import { CustomerGuard } from '../auth/customer.guard';
 import { Request } from 'express';
 @Controller('movies')
 export class MovieController {

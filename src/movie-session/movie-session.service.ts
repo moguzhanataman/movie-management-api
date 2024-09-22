@@ -2,7 +2,7 @@ import { Injectable, InternalServerErrorException, Logger } from '@nestjs/common
 import { MovieSession } from './movie-session.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { GeneralErrors } from 'src/_errors/errors';
+import { GeneralErrors } from '../_errors/errors';
 
 @Injectable()
 export class MovieSessionService {

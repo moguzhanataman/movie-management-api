@@ -1,8 +1,8 @@
 import { BadRequestException, Injectable, Logger, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
-import { BusinessErrors } from 'src/_errors/errors';
-import { User } from 'src/user/user.entity';
+import { BusinessErrors } from '../_errors/errors';
+import { User } from '../user/user.entity';
 import { Repository } from 'typeorm';
 
 @Injectable()

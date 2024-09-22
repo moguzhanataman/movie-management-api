@@ -1,5 +1,5 @@
 import { IsDateString, IsIn, IsNotEmpty } from 'class-validator';
-import { TimeSlots } from 'src/_constants/time-slots';
+import { TimeSlots } from '../../_constants/time-slots';
 
 export class CreateMovieSessionDto {
   @IsNotEmpty()

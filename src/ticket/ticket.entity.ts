@@ -1,5 +1,5 @@
-import { MovieSession } from 'src/movie-session/movie-session.entity';
-import { User } from 'src/user/user.entity';
+import { MovieSession } from '../movie-session/movie-session.entity';
+import { User } from '../user/user.entity';
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()

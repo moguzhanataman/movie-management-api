@@ -2,7 +2,7 @@ import { MovieSessionService } from './movie-session.service';
 import { Body, Controller, Delete, Post, UseGuards } from '@nestjs/common';
 import { CreateMovieSessionDto } from './dto/create-movie-session.dto';
 import { DeleteMovieSessionDto } from './dto/delete-movie-session.dto';
-import { ManagerGuard } from 'src/auth/manager.guard';
+import { ManagerGuard } from '../auth/manager.guard';
 
 @Controller('movie-session')
 export class MovieSessionController {

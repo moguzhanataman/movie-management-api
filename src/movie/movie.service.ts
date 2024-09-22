@@ -2,8 +2,8 @@ import { Injectable, InternalServerErrorException, NotFoundException, Unauthoriz
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Movie } from './movie.entity';
-import { Ticket } from 'src/ticket/ticket.entity';
-import { BusinessErrors } from 'src/_errors/errors';
+import { Ticket } from '../ticket/ticket.entity';
+import { BusinessErrors } from '../_errors/errors';
 
 @Injectable()
 export class MovieService {
