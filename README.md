@@ -15,6 +15,10 @@ It's an API written in NestJS to implement movie management system that can:
 
 ![diagram](docs/db_diagram.png)
 
+Diagram TODOs:
+
+- Add "deleted" field on movie
+
 ## Installation
 
 ```bash
