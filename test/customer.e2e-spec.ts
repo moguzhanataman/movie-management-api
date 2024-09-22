@@ -2,18 +2,26 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import { AppModule } from '../src/app.module';
-import { TestingDatabase } from './testing-utils';
+import { CustomerGuardOverride, TestingDatabase } from './testing-utils';
+import { CustomerGuard } from 'src/auth/customer.guard';
 
 describe('AppController (e2e)', () => {
   let app: INestApplication;
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
-      imports: [AppModule, TestingDatabase],
-    }).compile();
+      imports: [TestingDatabase, AppModule],
+    })
+      .overrideGuard(CustomerGuard)
+      .useValue(CustomerGuardOverride)
+      .compile();
 
     app = moduleFixture.createNestApplication();
     await app.init();
+  });
+
+  afterAll(async () => {
+    await app.close();
   });
 
   it('/ (GET)', () => {
