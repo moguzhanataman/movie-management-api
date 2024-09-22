@@ -1,8 +1,9 @@
-import { Body, Controller, Delete, Get, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Patch, Post, UseGuards } from '@nestjs/common';
 import { MovieService } from './movie.service';
 import { AddMovieDto } from './dto/add-movie.dto';
 import { DeleteMovieDto } from './dto/delete-movie.dto';
 import { UpdateMovieDto } from './dto/update-movie.dto';
+import { ManagerGuard } from 'src/auth/manager.guard';
 
 @Controller('movies')
 export class MovieController {
@@ -13,19 +14,19 @@ export class MovieController {
     return this.movieService.getAll();
   }
 
+  @UseGuards(ManagerGuard)
   @Post()
   async addMovie(@Body() addMovieDto: AddMovieDto) {
-    return this.movieService.addMovie(
-      addMovieDto.name,
-      addMovieDto.ageRestriction,
-    );
+    return this.movieService.addMovie(addMovieDto.name, addMovieDto.ageRestriction);
   }
 
+  @UseGuards(ManagerGuard)
   @Delete()
   async deleteMovie(@Body() deleteMovieDto: DeleteMovieDto) {
     return this.movieService.deleteMovie(deleteMovieDto.id);
   }
 
+  @UseGuards(ManagerGuard)
   @Patch()
   async updateMovie(@Body() updateMovieDto: UpdateMovieDto) {
     return this.movieService.updateMovie({
