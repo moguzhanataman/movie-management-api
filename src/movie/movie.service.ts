@@ -15,7 +15,7 @@ export class MovieService {
   ) {}
 
   getAll() {
-    return this.moviesRepository.findBy({ deleted: false });
+    return this.moviesRepository.find({ where: { deleted: false }, relations: ['sessions'] });
   }
 
   async addMovie(name: string, ageRestriction: number) {

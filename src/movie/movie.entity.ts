@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { MovieSession } from 'src/movie-session/movie-session.entity';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Movie {
@@ -13,4 +14,7 @@ export class Movie {
 
   @Column({ default: false })
   deleted: boolean;
+
+  @OneToMany(() => MovieSession, (s) => s.movie)
+  sessions: MovieSession[];
 }
