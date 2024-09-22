@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Patch, Post, Req, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, Req, UseGuards } from '@nestjs/common';
 import { MovieService } from './movie.service';
 import { AddMovieDto } from './dto/add-movie.dto';
 import { DeleteMovieDto } from './dto/delete-movie.dto';
@@ -17,11 +17,14 @@ export class MovieController {
 
   @UseGuards(CustomerGuard)
   @Post('/watch/:ticketId')
-  async watchMovie(@Req() req: Request) {
-    console.log(req.user);
+  async watchMovie(@Req() req: Request, @Param('ticketId') ticketId: string) {
+    return this.movieService.watchMovie(req.user.id, Number(ticketId));
+  }
 
-    // this.movieService.watchMovie();
-    return 'ok';
+  @UseGuards(CustomerGuard)
+  @Get('/watched')
+  async listWatchedMovies(@Req() req: Request) {
+    return this.movieService.listWatchedMovies(req.user.id);
   }
 
   @UseGuards(ManagerGuard)
