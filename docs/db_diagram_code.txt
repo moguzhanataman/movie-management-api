@@ -1,29 +1,29 @@
-# Can be edited on dbdiagram.io
-
 Table users {
   id number [pk]
   username string
   password string
   age number
-  user_type_id number [ref: > user_types.id]
-}
-
-Table user_types {
-  id number [pk]
-  type string
+  user_type string
 }
 
 Table movies {
   id number [pk]
   name string
   age_restriction number
+  deleted bool
 }
 
 Table tickets {
   id number [pk]
   user_id number [ref: > users.id]
+  session_id number [ref: > sessions.id]
+  watched bool
+}
+
+Table sessions {
+  id number [pk]
   movie_id number [ref: > movies.id]
   date date
   time_slot string
-  watched bool
+  room int
 }
