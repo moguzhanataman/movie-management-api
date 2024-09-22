@@ -27,15 +27,24 @@ export class MovieService {
 
   async deleteMovie(id: number) {
     const deleteResult = await this.moviesRepository.update({ id }, { deleted: true });
-    if (deleteResult.affected > 0) {
-      return { message: 'movie deleted' };
-    } else {
+    if (deleteResult.affected == 0) {
       throw new InternalServerErrorException('cant delete movie');
     }
   }
 
   async updateMovie(movie: Partial<Movie>) {
-    return this.moviesRepository.update({ id: movie.id }, { name: movie.name, ageRestriction: movie.ageRestriction });
+    const m = await this.moviesRepository.findOneBy({ id: movie.id });
+    if (movie.ageRestriction != null) {
+      m.ageRestriction = movie.ageRestriction;
+    }
+
+    if (movie.name != null) {
+      m.name = movie.name;
+    }
+
+    await this.moviesRepository.save(m);
+
+    return m;
   }
 
   async watchMovie(userId: number, ticketId: number) {

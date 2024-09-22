@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, Req, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpCode, Param, Patch, Post, Req, UseGuards } from '@nestjs/common';
 import { MovieService } from './movie.service';
 import { AddMovieDto } from './dto/add-movie.dto';
 import { DeleteMovieDto } from './dto/delete-movie.dto';
@@ -35,8 +35,9 @@ export class MovieController {
 
   @UseGuards(ManagerGuard)
   @Delete()
+  @HttpCode(204)
   async deleteMovie(@Body() deleteMovieDto: DeleteMovieDto) {
-    return this.movieService.deleteMovie(deleteMovieDto.id);
+    await this.movieService.deleteMovie(deleteMovieDto.id);
   }
 
   @UseGuards(ManagerGuard)
