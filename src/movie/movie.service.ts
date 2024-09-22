@@ -2,7 +2,6 @@ import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Movie } from './movie.entity';
-import { UpdateMovieDto } from './dto/update-movie.dto';
 
 @Injectable()
 export class MovieService {

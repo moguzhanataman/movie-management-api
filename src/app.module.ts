@@ -7,6 +7,7 @@ import { AuthModule } from './auth/auth.module';
 import { HttpExceptionFilter } from './errors/http-exception.filter';
 import { MovieModule } from './movie/movie.module';
 import { UserModule } from './user/user.module';
+import { TicketModule } from './ticket/ticket.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { UserModule } from './user/user.module';
     AuthModule,
     UserModule,
     MovieModule,
+    TicketModule,
   ],
   controllers: [AppController],
   providers: [
