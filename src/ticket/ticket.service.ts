@@ -4,7 +4,8 @@ import { Repository } from 'typeorm';
 import { Ticket } from './ticket.entity';
 import { Movie } from 'src/movie/movie.entity';
 import { User } from 'src/user/user.entity';
-import { BusinessErrors, GeneralErrors } from 'src/errors/errors';
+import { BusinessErrors, GeneralErrors } from 'src/_errors/errors';
+import { MovieSession } from 'src/movie-session/movie-session.entity';
 
 @Injectable()
 export class TicketService {
@@ -15,10 +16,16 @@ export class TicketService {
     private readonly movieRepository: Repository<Movie>,
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
+    @InjectRepository(MovieSession)
+    private readonly sessionRepository: Repository<MovieSession>,
   ) {}
 
-  async buyTicket(userId: number, movieId: number, room: number, date: Date, timeSlot: string) {
-    const movieExists = await this.movieRepository.findOneBy({ id: movieId });
+  async buyTicket(userId: number, sessionId: number) {
+    const session = await this.sessionRepository.findOne({ relations: ['user', 'movie'] });
+
+    console.log({ session });
+
+    const movieExists = await this.movieRepository.findOneBy({ id: session.movieId });
     const userExists = await this.userRepository.existsBy({ id: userId });
 
     if (movieExists == null) {
@@ -35,10 +42,7 @@ export class TicketService {
 
     const t = new Ticket();
     t.userId = userId;
-    t.movieId = movieId;
-    t.room = room;
-    t.date = date;
-    t.timeSlot = timeSlot;
+    t.sessionId = session.id;
 
     try {
       this.ticketRepository.save(t);

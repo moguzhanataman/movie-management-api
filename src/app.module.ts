@@ -4,10 +4,11 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
-import { HttpExceptionFilter } from './errors/http-exception.filter';
+import { HttpExceptionFilter } from './_errors/http-exception.filter';
 import { MovieModule } from './movie/movie.module';
 import { UserModule } from './user/user.module';
 import { TicketModule } from './ticket/ticket.module';
+import { MovieSessionModule } from './movie-session/movie-session.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { TicketModule } from './ticket/ticket.module';
     UserModule,
     MovieModule,
     TicketModule,
+    MovieSessionModule,
   ],
   controllers: [AppController],
   providers: [

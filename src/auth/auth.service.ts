@@ -5,7 +5,7 @@ import {
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
-import { BusinessErrors } from 'src/errors/errors';
+import { BusinessErrors } from 'src/_errors/errors';
 import { User } from 'src/user/user.entity';
 import { Repository } from 'typeorm';
 
