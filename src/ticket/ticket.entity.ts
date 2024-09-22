@@ -15,11 +15,11 @@ export class Ticket {
   user: User;
 
   @Column()
-  sessionId: number;
+  movieSessionId: number;
 
   @ManyToOne(() => MovieSession, (session) => session.id)
   @JoinColumn()
-  session: MovieSession;
+  movieSession: MovieSession;
 
   @Column({ default: false })
   watched: boolean;

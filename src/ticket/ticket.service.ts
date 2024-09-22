@@ -1,4 +1,10 @@
-import { BadRequestException, Injectable, InternalServerErrorException, Logger } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  InternalServerErrorException,
+  Logger,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Ticket } from './ticket.entity';
@@ -21,7 +27,14 @@ export class TicketService {
   ) {}
 
   async buyTicket(userId: number, sessionId: number) {
-    const session = await this.sessionRepository.findOne({ relations: ['user', 'movie'] });
+    const session = await this.sessionRepository.findOne({
+      where: { id: sessionId },
+      relations: ['movie'],
+    });
+
+    if (session == null) {
+      throw new NotFoundException(BusinessErrors.Ticket.MovieSessionNotFound);
+    }
 
     console.log({ session });
 
@@ -29,7 +42,7 @@ export class TicketService {
     const userExists = await this.userRepository.existsBy({ id: userId });
 
     if (movieExists == null) {
-      throw new BadRequestException(BusinessErrors.Ticket.MovieNotExists);
+      throw new NotFoundException(BusinessErrors.Ticket.MovieNotExists);
     }
 
     if (movieExists.deleted) {
@@ -37,12 +50,12 @@ export class TicketService {
     }
 
     if (!userExists) {
-      throw new BadRequestException(BusinessErrors.Ticket.UserNotExists);
+      throw new NotFoundException(BusinessErrors.Ticket.UserNotExists);
     }
 
     const t = new Ticket();
     t.userId = userId;
-    t.sessionId = session.id;
+    t.movieSessionId = session.id;
 
     try {
       this.ticketRepository.save(t);

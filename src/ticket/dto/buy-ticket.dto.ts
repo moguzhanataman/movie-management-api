@@ -3,7 +3,7 @@ import { TimeSlots } from 'src/_constants/time-slots';
 
 export class BuyTicketDto {
   @IsNotEmpty()
-  sessionId: number;
+  movieSessionId: number;
 }
 
 // export class BuyTicketDto {

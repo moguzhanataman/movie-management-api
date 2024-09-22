@@ -8,6 +8,7 @@ export class TicketController {
 
   @Post('buy')
   async buyTicket(@Body() buyTicketDto: BuyTicketDto) {
-    await this.ticketService.buyTicket(1, buyTicketDto.sessionId);
+    await this.ticketService.buyTicket(1, buyTicketDto.movieSessionId);
+    console.log({ buyTicketDto });
   }
 }

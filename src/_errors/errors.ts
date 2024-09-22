@@ -4,9 +4,10 @@ export const BusinessErrors = {
     UserExists: 'User already exists',
   },
   Ticket: {
-    MovieNotExists: 'Movie that you trying to purchase ticket for does not exists',
+    MovieNotExists: 'Movie not found',
     MovieDeleted: "You can't ticket for deleted movie",
-    UserNotExists: 'User does not exists',
+    MovieSessionNotFound: 'Movie session not found',
+    UserNotExists: 'User not found',
   },
 };
 
