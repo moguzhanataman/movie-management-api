@@ -1,5 +1,5 @@
 import { MovieSessionService } from './movie-session.service';
-import { Body, Controller, Delete, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, HttpCode, Post, UseGuards } from '@nestjs/common';
 import { CreateMovieSessionDto } from './dto/create-movie-session.dto';
 import { DeleteMovieSessionDto } from './dto/delete-movie-session.dto';
 import { ManagerGuard } from '../auth/manager.guard';
@@ -10,8 +10,9 @@ export class MovieSessionController {
 
   @UseGuards(ManagerGuard)
   @Post()
-  createSession(@Body() createSessionDto: CreateMovieSessionDto) {
-    this.movieSessionService.create(createSessionDto);
+  @HttpCode(201)
+  async createSession(@Body() createSessionDto: CreateMovieSessionDto) {
+    await this.movieSessionService.create(createSessionDto);
   }
 
   @UseGuards(ManagerGuard)

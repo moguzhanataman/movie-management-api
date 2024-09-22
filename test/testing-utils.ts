@@ -31,7 +31,7 @@ export const CustomerGuardOverride = {
   canActivate: (context: ExecutionContext) => {
     const req = context.switchToHttp().getRequest();
     req.user = {
-      id: 1,
+      id: 2,
       username: 'john doe',
       userType: 'customer',
     };
@@ -46,12 +46,14 @@ export async function seedTestDatabase(moduleFixture: TestingModule) {
   const userRepo: Repository<User> = moduleFixture.get('UserRepository');
 
   const manager = new User();
+  manager.id = 1;
   manager.username = 'admin';
   manager.password = 'admin';
   manager.userType = UserTypes.manager;
   manager.age = 100;
 
   const customer = new User();
+  customer.id = 2;
   customer.username = 'john doe';
   customer.password = '123';
   customer.userType = UserTypes.customer;
@@ -60,6 +62,7 @@ export async function seedTestDatabase(moduleFixture: TestingModule) {
   await userRepo.save([manager, customer]);
 
   const m = new Movie();
+  m.id = 1;
   m.name = 'Test Movie 1';
   m.ageRestriction = 0;
   await movieRepo.save(m);
@@ -69,6 +72,13 @@ export async function seedTestDatabase(moduleFixture: TestingModule) {
   ms.room = 1;
   ms.timeSlot = '10:00-12:00';
   ms.movieId = m.id;
+  await movieSessionRepo.save(ms);
+
+  const t = new Ticket();
+  t.id = 1;
+  t.movieSessionId = ms.id;
+  t.userId = customer.id;
+  await ticketRepo.save(t);
 
   const movies = await movieRepo.find({});
 }

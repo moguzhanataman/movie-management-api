@@ -40,7 +40,7 @@ export class TicketService {
     const userExists = await this.userRepository.existsBy({ id: userId });
 
     if (movieExists == null) {
-      throw new NotFoundException(BusinessErrors.Ticket.MovieNotExists);
+      throw new NotFoundException(BusinessErrors.Ticket.MovieNotFound);
     }
 
     if (movieExists.deleted) {
@@ -48,7 +48,7 @@ export class TicketService {
     }
 
     if (!userExists) {
-      throw new NotFoundException(BusinessErrors.Ticket.UserNotExists);
+      throw new NotFoundException(BusinessErrors.Ticket.UserNotFound);
     }
 
     const t = new Ticket();

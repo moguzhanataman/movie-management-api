@@ -37,4 +37,8 @@ describe('AppController (e2e)', () => {
       .expect(200)
       .then((res) => expect(res.body.length).toBeGreaterThanOrEqual(0));
   });
+
+  it('/movies/watch/1 (POST)', () => {
+    return request(app.getHttpServer()).post('/movies/watch/1').expect(200);
+  });
 });

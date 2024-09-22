@@ -5,11 +5,14 @@ export const BusinessErrors = {
   },
   Ticket: {
     NotFound: 'Ticket not found',
-    MovieNotExists: 'Movie not found',
+    MovieNotFound: 'Movie not found',
     MovieDeleted: "You can't ticket for deleted movie",
     MovieSessionNotFound: 'Movie session not found',
-    UserNotExists: 'User not found',
+    UserNotFound: 'User not found',
     NotMyTicket: "You don't own this ticket",
+  },
+  Session: {
+    MovieNotFound: 'Movie not found',
   },
 };
 
