@@ -5,7 +5,6 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { HttpExceptionFilter } from './errors/http-exception.filter';
-import { MovieController } from './movie/movie.controller';
 import { MovieModule } from './movie/movie.module';
 import { UserModule } from './user/user.module';
 
