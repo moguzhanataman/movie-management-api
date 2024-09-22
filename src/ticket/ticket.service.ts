@@ -36,9 +36,7 @@ export class TicketService {
       throw new NotFoundException(BusinessErrors.Ticket.MovieSessionNotFound);
     }
 
-    console.log({ session });
-
-    const movieExists = await this.movieRepository.findOneBy({ id: session.movieId });
+    const movieExists = session.movie;
     const userExists = await this.userRepository.existsBy({ id: userId });
 
     if (movieExists == null) {
