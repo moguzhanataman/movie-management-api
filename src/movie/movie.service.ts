@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Movie } from './movie.entity';
@@ -23,7 +23,15 @@ export class MovieService {
   }
 
   async deleteMovie(id: number) {
-    return this.moviesRepository.update({ id }, { deleted: true });
+    const deleteResult = await this.moviesRepository.update(
+      { id },
+      { deleted: true },
+    );
+    if (deleteResult.affected > 0) {
+      return { message: 'movie deleted' };
+    } else {
+      throw new InternalServerErrorException('cant delete movie');
+    }
   }
 
   async updateMovie(movie: Partial<Movie>) {
