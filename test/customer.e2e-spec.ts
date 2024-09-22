@@ -1,12 +1,13 @@
-import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
+import { Test, TestingModule } from '@nestjs/testing';
 import * as request from 'supertest';
 import { AppModule } from '../src/app.module';
-import { CustomerGuardOverride, TestingDatabase } from './testing-utils';
-import { CustomerGuard } from 'src/auth/customer.guard';
+import { CustomerGuard } from '../src/auth/customer.guard';
+import { CustomerGuardOverride, seedTestDatabase, TestingDatabase } from './testing-utils';
 
 describe('AppController (e2e)', () => {
   let app: INestApplication;
+  let movieRepo;
 
   beforeAll(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
@@ -15,6 +16,8 @@ describe('AppController (e2e)', () => {
       .overrideGuard(CustomerGuard)
       .useValue(CustomerGuardOverride)
       .compile();
+
+    await seedTestDatabase(moduleFixture);
 
     app = moduleFixture.createNestApplication();
     await app.init();
