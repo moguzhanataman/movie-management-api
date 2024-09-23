@@ -1,3 +1,4 @@
+import { AddMovieDto } from './dto/add-movie.dto';
 import { Injectable, InternalServerErrorException, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -18,10 +19,15 @@ export class MovieService {
     return this.moviesRepository.find({ where: { deleted: false }, relations: ['sessions'] });
   }
 
-  async addMovie(name: string, ageRestriction: number) {
+  async addMovie(addMovieDto: AddMovieDto) {
     const m = new Movie();
-    m.name = name;
-    m.ageRestriction = ageRestriction;
+    m.name = addMovieDto.name;
+    m.ageRestriction = addMovieDto.ageRestriction;
+
+    if (addMovieDto.room != null && addMovieDto?.timeSlots?.length > 0) {
+      // Add sessions also
+      // TODO: check if room is booked for given timeslots
+    }
     return this.moviesRepository.save(m);
   }
 

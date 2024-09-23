@@ -1,3 +1,4 @@
+import { UserTypes } from './../_constants/user-types';
 import { BadRequestException, Injectable, Logger, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -13,7 +14,7 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
-  async register(username: string, password: string, age: number) {
+  async register(username: string, password: string, age: number, userType: string) {
     const user = await this.usersRepository.findOneBy({ username });
 
     // User exists
@@ -25,6 +26,9 @@ export class AuthService {
     u.username = username;
     u.password = password;
     u.age = age;
+    if (userType != null) {
+      u.userType = userType;
+    }
     this.usersRepository.save(u);
   }
 

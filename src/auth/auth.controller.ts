@@ -19,6 +19,6 @@ export class AuthenticationController {
 
   @Post('register')
   async register(@Body() registerDto: RegisterDto) {
-    await this.authService.register(registerDto.username, registerDto.password, registerDto.age);
+    await this.authService.register(registerDto.username, registerDto.password, registerDto.age, registerDto.userType);
   }
 }

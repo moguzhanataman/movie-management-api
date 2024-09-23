@@ -9,4 +9,7 @@ export class AddMovieDto {
   @ApiProperty({ example: 18 })
   @IsNotEmpty()
   ageRestriction: number;
+
+  room: number;
+  timeSlots: string[];
 }

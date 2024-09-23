@@ -42,7 +42,7 @@ export class MovieController {
   @UseGuards(ManagerGuard)
   @Post()
   async addMovie(@Body() addMovieDto: AddMovieDto) {
-    return this.movieService.addMovie(addMovieDto.name, addMovieDto.ageRestriction);
+    return this.movieService.addMovie(addMovieDto);
   }
 
   @ApiOperation({ summary: 'Soft deletes movie' })

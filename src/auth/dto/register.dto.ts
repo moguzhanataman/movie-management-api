@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty } from 'class-validator';
+import { IsIn, IsNotEmpty } from 'class-validator';
+import { UserTypes } from '../../_constants/user-types';
 
 export class RegisterDto {
   @ApiProperty({ example: 'admin' })
@@ -13,4 +14,8 @@ export class RegisterDto {
   @ApiProperty({ example: 25 })
   @IsNotEmpty()
   age: number;
+
+  @ApiProperty({ example: 'manager' })
+  @IsIn(Object.keys(UserTypes))
+  userType: string;
 }
