@@ -1,4 +1,4 @@
-import { Injectable, CanActivate, ExecutionContext, UnauthorizedException } from '@nestjs/common';
+import { Injectable, CanActivate, ExecutionContext, UnauthorizedException, ForbiddenException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { Request } from 'express';
 import { UserTypes } from '../_constants/user-types';
@@ -19,7 +19,7 @@ export class ManagerGuard implements CanActivate {
       });
 
       if (payload.userType != UserTypes.manager) {
-        throw new UnauthorizedException();
+        throw new ForbiddenException();
       }
 
       request['user'] = payload;
