@@ -1,6 +1,14 @@
 import { MovieSession } from '../movie-session/movie-session.entity';
 import { User } from '../user/user.entity';
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
 @Entity()
 export class Ticket {
@@ -23,4 +31,10 @@ export class Ticket {
 
   @Column({ default: false })
   watched: boolean;
+
+  @CreateDateColumn()
+  createdAt: Date;
+
+  @UpdateDateColumn()
+  updatedAt: Date;
 }

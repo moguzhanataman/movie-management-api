@@ -1,5 +1,5 @@
 import { MovieSession } from '../movie-session/movie-session.entity';
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 
 @Entity()
 export class Movie {
@@ -17,4 +17,10 @@ export class Movie {
 
   @OneToMany(() => MovieSession, (s) => s.movie)
   sessions: MovieSession[];
+
+  @CreateDateColumn()
+  createdAt: Date;
+
+  @UpdateDateColumn()
+  updatedAt: Date;
 }
