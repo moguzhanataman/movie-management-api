@@ -27,10 +27,6 @@ describe('AppController (e2e)', () => {
     await app.close();
   });
 
-  it('/ (GET)', () => {
-    return request(app.getHttpServer()).get('/').expect(200).expect('Hello World!');
-  });
-
   // Movie add/remove/update operations
   it('/movies (POST)', () => {
     return request(app.getHttpServer()).post('/movies').send({ name: 'Test Movie', ageRestriction: 0 }).expect(201);
