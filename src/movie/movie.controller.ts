@@ -6,10 +6,15 @@ import { UpdateMovieDto } from './dto/update-movie.dto';
 import { ManagerGuard } from '../auth/manager.guard';
 import { CustomerGuard } from '../auth/customer.guard';
 import { Request } from 'express';
+import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
+
+@ApiBearerAuth()
+@ApiTags('movies')
 @Controller('movies')
 export class MovieController {
   constructor(private readonly movieService: MovieService) {}
 
+  @ApiOperation({ summary: 'List of movies with available sessions information' })
   @Get()
   async movieList() {
     return this.movieService.getAll();
