@@ -72,7 +72,13 @@ export async function seedTestDatabase(moduleFixture: TestingModule) {
   ms.room = 1;
   ms.timeSlot = '10:00-12:00';
   ms.movieId = m.id;
-  await movieSessionRepo.save(ms);
+
+  const ms2 = new MovieSession();
+  ms2.date = new Date();
+  ms2.room = 2;
+  ms2.timeSlot = '12:00-14:00';
+  ms2.movieId = m.id;
+  await movieSessionRepo.save([ms, ms2]);
 
   const t = new Ticket();
   t.id = 1;

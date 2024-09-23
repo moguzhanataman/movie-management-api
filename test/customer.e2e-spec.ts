@@ -38,6 +38,10 @@ describe('AppController (e2e)', () => {
       .then((res) => expect(res.body.length).toBeGreaterThanOrEqual(0));
   });
 
+  it('/ticket/buy (POST)', () => {
+    return request(app.getHttpServer()).post('/ticket/buy').send({ movieSessionId: 2 }).expect(201);
+  });
+
   it('/movies/watch/1 (POST)', () => {
     return request(app.getHttpServer()).post('/movies/watch/1').expect(204);
   });
