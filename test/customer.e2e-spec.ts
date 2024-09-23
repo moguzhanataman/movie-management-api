@@ -39,6 +39,6 @@ describe('AppController (e2e)', () => {
   });
 
   it('/movies/watch/1 (POST)', () => {
-    return request(app.getHttpServer()).post('/movies/watch/1').expect(200);
+    return request(app.getHttpServer()).post('/movies/watch/1').expect(204);
   });
 });

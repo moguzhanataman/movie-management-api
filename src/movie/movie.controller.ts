@@ -17,6 +17,7 @@ export class MovieController {
 
   @UseGuards(CustomerGuard)
   @Post('/watch/:ticketId')
+  @HttpCode(204)
   async watchMovie(@Req() req: Request, @Param('ticketId') ticketId: string) {
     return this.movieService.watchMovie(req.user.id, Number(ticketId));
   }

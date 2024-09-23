@@ -1,6 +1,6 @@
 import { Injectable, InternalServerErrorException, Logger, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Movie } from 'src/movie/movie.entity';
+import { Movie } from '../movie/movie.entity';
 import { Repository } from 'typeorm';
 import { BusinessErrors, GeneralErrors } from '../_errors/errors';
 import { MovieSession } from './movie-session.entity';

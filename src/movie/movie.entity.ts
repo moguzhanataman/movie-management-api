@@ -1,4 +1,4 @@
-import { MovieSession } from 'src/movie-session/movie-session.entity';
+import { MovieSession } from '../movie-session/movie-session.entity';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
